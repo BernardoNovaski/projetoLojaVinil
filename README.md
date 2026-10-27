@@ -1,5 +1,5 @@
 # projetoLojaVinil
-# Vinyl Palace: Sistema de Gestão da Loja de Discos de Vinil Retrô (1985)
+# Vinyl Hub: Sistema de Gestão da Loja de Discos de Vinil Retrô (1985)
 
 Projeto da disciplina **Algoritmos e Pensamento Computacional**, referente ao **Checkpoint 1 (Gateway 1)** do Projeto P2.
 

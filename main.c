@@ -61,7 +61,7 @@ int totalVendas = 0;
 // Funcao visual comum da equipe
 void exibirCabecalho() {
     printf("\n======================================================\n");
-    printf("   VINYL PALACE - SISTEMA DE GESTAO RETRO (1985)      \n");
+    printf("   VINYL HUB - SISTEMA DE GESTAO RETRO (1985)      \n");
     printf("   Discos de Vinil | Cabines de Escuta | Caixa        \n");
     printf("======================================================\n");
 }
@@ -267,7 +267,7 @@ int main() {
                 moduloVendasRelatorios();
                 break;
             case 0:
-                printf("\nEncerrando o sistema Vinyl Palace... Ate logo!\n");
+                printf("\nEncerrando o sistema Vinyl Hub... Ate logo!\n");
                 break;
             default:
                 printf("\n[ALERTA] Opcao invalida! Digite um numero de 0 a 4.\n");
