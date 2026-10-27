@@ -7,7 +7,7 @@
 // PARTE 1: MODELAGEM DE DADOS (ESCOPO GLOBAL - 1 STRUCT POR INTEGRANTE)
 // ============================================================================
 
-// 1. Perspectiva do Integrante A: Acervo de Discos de Vinil
+// 1. Perspectiva de Nathan Souza Gusso: Acervo de Discos de Vinil
 struct Disco {
     int idDisco;
     char titulo[50];
@@ -19,7 +19,7 @@ struct Disco {
 struct Disco acervoDiscos[50];
 int totalDiscos = 0;
 
-// 2. Perspectiva do Integrante B: Cabines de Escuta da Loja
+// 2. Perspectiva de Guilherme Monteiro de Andrade: Cabines de Escuta da Loja
 struct Cabine {
     int idCabine;
     int numeroCabine;
@@ -31,7 +31,7 @@ struct Cabine {
 struct Cabine listaCabines[50];
 int totalCabines = 0;
 
-// 3. Perspectiva do Integrante C: Clientes do Clube do Vinil
+// 3. Perspectiva de Jose Gustavo da Silva Bertoche: Clientes do Clube do Vinil
 struct Cliente {
     int idCliente;
     char nome[50];
@@ -43,7 +43,7 @@ struct Cliente {
 struct Cliente listaClientes[50];
 int totalClientes = 0;
 
-// 4. Perspectiva do Integrante D: Vendas no Caixa e Relatorios
+// 4. Perspectiva de Bernardo Novaski Vidal de Almeida: Vendas no Caixa e Relatorios
 struct Venda {
     int idVenda;
     int idClienteComprador;
@@ -68,13 +68,13 @@ void exibirCabecalho() {
 
 // ----------------------------------------------------------------------------
 // MODULO 1: PERSPECTIVA DO ACERVO DE DISCOS
-// Autor: Integrante A (Nome Completo e RGM)
+// Autor: Nathan Souza Gusso
 // ----------------------------------------------------------------------------
 void moduloDiscos() {
     int opcaoDisco;
 
     do {
-        printf("\n--- [MODULO 1: ACERVO DE DISCOS (Integrante A)] ---\n");
+        printf("\n--- [MODULO 1: ACERVO DE DISCOS (Nathan Souza Gusso)] ---\n");
         printf("1. Cadastrar Novo Disco\n");
         printf("2. Listar / Buscar Discos\n");
         printf("3. Editar Dados de um Disco (Preco / Estoque)\n");
@@ -108,13 +108,13 @@ void moduloDiscos() {
 
 // ----------------------------------------------------------------------------
 // MODULO 2: PERSPECTIVA DAS CABINES DE ESCUTA
-// Autor: Integrante B (Nome Completo e RGM)
+// Autor: Guilherme Monteiro de Andrade
 // ----------------------------------------------------------------------------
 void moduloCabines() {
     int opcaoCabine;
 
     do {
-        printf("\n--- [MODULO 2: CABINES DE ESCUTA (Integrante B)] ---\n");
+        printf("\n--- [MODULO 2: CABINES DE ESCUTA (Guilherme Monteiro de Andrade)] ---\n");
         printf("1. Cadastrar Nova Cabine\n");
         printf("2. Listar / Buscar Cabines (Livres e Ocupadas)\n");
         printf("3. Editar Cabine (Status / Tempo de Uso / Cliente)\n");
@@ -148,13 +148,13 @@ void moduloCabines() {
 
 // ----------------------------------------------------------------------------
 // MODULO 3: PERSPECTIVA DOS CLIENTES DO CLUBE DO VINIL
-// Autor: Integrante C (Nome Completo e RGM)
+// Autor: Jose Gustavo da Silva Bertoche
 // ----------------------------------------------------------------------------
 void moduloClientes() {
     int opcaoCliente;
 
     do {
-        printf("\n--- [MODULO 3: CLIENTES DO CLUBE DO VINIL (Integrante C)] ---\n");
+        printf("\n--- [MODULO 3: CLIENTES DO CLUBE DO VINIL (Jose Gustavo da Silva Bertoche)] ---\n");
         printf("1. Cadastrar Novo Cliente\n");
         printf("2. Listar / Buscar Clientes\n");
         printf("3. Editar Dados ou Pontos de Fidelidade\n");
@@ -188,13 +188,13 @@ void moduloClientes() {
 
 // ----------------------------------------------------------------------------
 // MODULO 4: PERSPECTIVA DE VENDAS E RELATORIOS ANALITICOS
-// Autor: Integrante D (Nome Completo e RGM)
+// Autor: Bernardo Novaski Vidal de Almeida
 // ----------------------------------------------------------------------------
 void moduloVendasRelatorios() {
     int opcaoVenda;
 
     do {
-        printf("\n--- [MODULO 4: VENDAS E RELATORIOS (Integrante D)] ---\n");
+        printf("\n--- [MODULO 4: VENDAS E RELATORIOS (Bernardo Novaski Vidal de Almeida)] ---\n");
         printf("1. Registrar Nova Venda no Caixa (Cruza Cliente + Disco)\n");
         printf("2. Listar Historico de Vendas\n");
         printf("3. Cancelar / Estornar Venda\n");
@@ -244,10 +244,10 @@ int main() {
     do {
         exibirCabecalho();
         printf("SELECIONE A PERSPECTIVA DO SISTEMA:\n");
-        printf("1. Modulo de Discos / Acervo (Integrante A)\n");
-        printf("2. Modulo de Cabines de Escuta (Integrante B)\n");
-        printf("3. Modulo de Clientes (Integrante C)\n");
-        printf("4. Modulo de Vendas e Relatorios (Integrante D)\n");
+        printf("1. Modulo de Discos / Acervo (Nathan Souza Gusso)\n");
+        printf("2. Modulo de Cabines de Escuta (Guilherme Monteiro de Andrade)\n");
+        printf("3. Modulo de Clientes (Jose Gustavo da Silva Bertoche)\n");
+        printf("4. Modulo de Vendas e Relatorios (Bernardo Novaski Vidal de Almeida)\n");
         printf("0. Encerrar o Sistema\n");
         printf("------------------------------------------------------\n");
         printf("Digite a opcao desejada: ");
