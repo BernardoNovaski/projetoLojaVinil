@@ -1,5 +1,6 @@
 # projetoLojaVinil
 # Vinyl Hub: Sistema de Gestão da Loja de Discos de Vinil Retrô (1985)
+TURMA DE SEGUNDA-FEIRA À NOITE - GRUPO 2 - TEMA 5 - LOJA DE DISCO DE VINIL
 
 Projeto da disciplina **Algoritmos e Pensamento Computacional**, referente ao **Checkpoint 1 (Gateway 1)** do Projeto P2.
 
