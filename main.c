@@ -23,6 +23,8 @@ int totalDiscos = 0;
 struct Cabine {
     int idCabine;
     int numeroCabine;
+    char descricao[40];      // ex.: "Cabine Jazz", "Cabine Rock"
+    float valorHoraUso;      // ou taxa de uso, se fizer sentido
     int statusOcupacao;      // 1 = Ocupada, 0 = Livre
     int tempoUsoMinutos;
     int idClienteUsando;
@@ -48,7 +50,9 @@ struct Venda {
     int idVenda;
     int idClienteComprador;
     int idDiscoVendido;
+    int quantidade;
     float valorTotal;
+    char dataVenda[11];      // "DD/MM/AAAA"
 };
 
 struct Venda historicoVendas[50];
