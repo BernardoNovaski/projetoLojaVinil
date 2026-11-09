@@ -6,7 +6,7 @@
 // PARTE 1: MODELAGEM DE DADOS (ESCOPO GLOBAL - 1 STRUCT POR INTEGRANTE)
 // ============================================================================
 
-// 1. Perspectiva de Nathan Souza Gusso: Acervo de Discos de Vinil
+// 1. Nathan Souza Gusso: Acervo de Discos de Vinil
 struct Disco {
     int idDisco;
     char titulo[50];
@@ -19,7 +19,7 @@ struct Disco {
 struct Disco acervoDiscos[50];
 int totalDiscos = 0;
 
-// 2. Perspectiva de Guilherme Monteiro de Andrade: Cabines de Escuta da Loja
+// 2. Guilherme Monteiro de Andrade: Cabines de Escuta da Loja
 struct Cabine {
     int idCabine;
     int numeroCabine;
@@ -34,7 +34,7 @@ struct Cabine {
 struct Cabine listaCabines[50];
 int totalCabines = 0;
 
-// 3. Perspectiva de Jose Gustavo da Silva Bertoche: Clientes do Clube do Vinil
+// 3. Jose Gustavo da Silva Bertoche: Clientes do Clube do Vinil
 struct Cliente {
     int idCliente;
     char nome[50];
@@ -46,7 +46,7 @@ struct Cliente {
 struct Cliente listaClientes[50];
 int totalClientes = 0;
 
-// 4. Perspectiva de Bernardo Novaski Vidal de Almeida: Vendas no Caixa e Relatorios
+// 4. Bernardo Novaski Vidal de Almeida: Vendas no Caixa e Relatorios
 struct Venda {
     int idVenda;
     int idClienteComprador;
@@ -65,7 +65,7 @@ int totalVendas = 0;
 // ============================================================================
 
 // Funcao visual comum da equipe
-// Autor: Equipe (funcao comum)
+// Autor: Equipe
 void exibirCabecalho() {
     printf("\n======================================================\n");
     printf("   VINYL HUB - SISTEMA DE GESTAO RETRO (1985)      \n");
@@ -74,7 +74,7 @@ void exibirCabecalho() {
 }
 
 // Descarta o que sobrou digitado na linha (evita loop infinito por texto no lugar de numero)
-// Autor: Equipe (funcao comum)
+// Autor: Equipe 
 void limparBuffer() {
     int c;
 
@@ -84,7 +84,7 @@ void limparBuffer() {
 }
 
 // Le um numero inteiro; repete a pergunta ate o usuario digitar um numero valido
-// Autor: Equipe (funcao comum)
+// Autor: Equipe 
 int lerInteiro() {
     int valor, lidos;
 
@@ -102,7 +102,7 @@ int lerInteiro() {
 }
 
 // Le um numero decimal (use ponto, ex.: 80.50); repete ate digitar um numero valido
-// Autor: Equipe (funcao comum)
+// Autor: Equipe
 float lerReal() {
     float valor;
     int lidos;
@@ -122,8 +122,6 @@ float lerReal() {
 
 // ----------------------------------------------------------------------------
 // FUNCOES AUXILIARES DE BUSCA (usadas por mais de um modulo)
-// Retornam a posicao do registro no vetor ou -1 se o ID nao existir.
-// Quem chama deve conferir o campo "ativo" quando precisar.
 // ----------------------------------------------------------------------------
 
 // Autor: Nathan Souza Gusso
@@ -155,7 +153,6 @@ int buscarClientePorId(int id) {
 // Autor: Nathan Souza Gusso
 // ----------------------------------------------------------------------------
 
-// Autor: Nathan Souza Gusso
 void exibirDisco(int i) {
     printf("\nDisco ID %d\n", acervoDiscos[i].idDisco);
     printf("Titulo: %s\n", acervoDiscos[i].titulo);
@@ -164,7 +161,6 @@ void exibirDisco(int i) {
     printf("Estoque: %d unidade(s)\n", acervoDiscos[i].quantidadeEstoque);
 }
 
-// Autor: Nathan Souza Gusso
 void cadastrarDisco() {
     if (totalDiscos >= 50) {
         printf("\nLimite de 50 discos atingido!\n");
@@ -204,7 +200,6 @@ void cadastrarDisco() {
     printf("\nDisco cadastrado com sucesso!\n");
 }
 
-// Autor: Nathan Souza Gusso
 void listarDiscos() {
     int opcaoListagem, id, indice, i, encontrou;
 
@@ -242,7 +237,6 @@ void listarDiscos() {
     }
 }
 
-// Autor: Nathan Souza Gusso
 void editarDisco() {
     int id, indice;
 
@@ -277,7 +271,6 @@ void editarDisco() {
     printf("\nDisco atualizado com sucesso!\n");
 }
 
-// Autor: Nathan Souza Gusso
 void removerDisco() {
     int id, indice;
 
@@ -294,7 +287,6 @@ void removerDisco() {
     printf("\nDisco '%s' removido do acervo!\n", acervoDiscos[indice].titulo);
 }
 
-// Autor: Nathan Souza Gusso
 void moduloDiscos() {
     int opcaoDisco;
 
@@ -335,8 +327,6 @@ void moduloDiscos() {
 // Autor: Guilherme Monteiro de Andrade
 // ----------------------------------------------------------------------------
 
-// Mostra as musicas de um genero e "toca" a escolhida
-// Autor: Guilherme Monteiro de Andrade
 void tocarMusica(char nomeGenero[], char musicas[][50], int totalMusicas) {
     int escolha;
     int i;
@@ -363,7 +353,6 @@ void tocarMusica(char nomeGenero[], char musicas[][50], int totalMusicas) {
 }
 
 // Menu de generos da cabine de escuta
-// Autor: Guilherme Monteiro de Andrade
 void escutarMusicas() {
     int opcaoGenero;
     int i;
@@ -428,7 +417,6 @@ void escutarMusicas() {
     } while (opcaoGenero != 0);
 }
 
-// Autor: Guilherme Monteiro de Andrade
 int buscarCabinePorId(int id) {
     int i;
 
@@ -440,7 +428,6 @@ int buscarCabinePorId(int id) {
     return -1;
 }
 
-// Autor: Guilherme Monteiro de Andrade
 void exibirCabine(int i) {
     printf("\nCabine ID %d\n", listaCabines[i].idCabine);
     printf("Numero: %d\n", listaCabines[i].numeroCabine);
@@ -454,7 +441,6 @@ void exibirCabine(int i) {
     }
 }
 
-// Autor: Guilherme Monteiro de Andrade
 void cadastrarCabine() {
     if (totalCabines >= 50) {
         printf("\nLimite de 50 cabines atingido!\n");
@@ -488,7 +474,6 @@ void cadastrarCabine() {
     printf("\nCabine cadastrada com sucesso!\n");
 }
 
-// Autor: Guilherme Monteiro de Andrade
 void listarCabines() {
     int opcaoListagem, id, indice, i, encontrou;
 
@@ -534,7 +519,6 @@ void listarCabines() {
     }
 }
 
-// Autor: Guilherme Monteiro de Andrade
 void editarCabine() {
     int id, indice, idCliente, indiceCliente;
 
@@ -588,7 +572,6 @@ void editarCabine() {
     printf("\nCabine atualizada com sucesso!\n");
 }
 
-// Autor: Guilherme Monteiro de Andrade
 void removerCabine() {
     int id, indice;
 
@@ -608,7 +591,6 @@ void removerCabine() {
     printf("\nBaixa da cabine %d realizada com sucesso!\n", listaCabines[indice].numeroCabine);
 }
 
-// Autor: Guilherme Monteiro de Andrade
 void moduloCabines() {
     int opcaoCabine;
 
@@ -653,7 +635,6 @@ void moduloCabines() {
 // Autor: Jose Gustavo da Silva Bertoche
 // ----------------------------------------------------------------------------
 
-// Autor: Jose Gustavo da Silva Bertoche
 void exibirCliente(int i) {
     printf("\nCliente ID %d\n", listaClientes[i].idCliente);
     printf("Nome: %s\n", listaClientes[i].nome);
@@ -661,7 +642,6 @@ void exibirCliente(int i) {
     printf("Pontos de fidelidade: %d\n", listaClientes[i].pontosFidelidade);
 }
 
-// Autor: Jose Gustavo da Silva Bertoche
 void cadastrarCliente() {
     if (totalClientes >= 50) {
         printf("\nLimite de 50 clientes atingido!\n");
@@ -686,7 +666,6 @@ void cadastrarCliente() {
     printf("\nCliente cadastrado com sucesso!\n");
 }
 
-// Autor: Jose Gustavo da Silva Bertoche
 void listarClientes() {
     int opcaoListagem, id, indice, i, encontrou;
 
@@ -724,7 +703,6 @@ void listarClientes() {
     }
 }
 
-// Autor: Jose Gustavo da Silva Bertoche
 void editarCliente() {
     int id, indice, opcaoEdicao;
 
@@ -775,7 +753,6 @@ void editarCliente() {
     }
 }
 
-// Autor: Jose Gustavo da Silva Bertoche
 void removerCliente() {
     int id, indice;
 
@@ -792,7 +769,6 @@ void removerCliente() {
     printf("\nCliente '%s' removido com sucesso!\n", listaClientes[indice].nome);
 }
 
-// Autor: Jose Gustavo da Silva Bertoche
 void moduloClientes() {
     int opcaoCliente;
 
@@ -833,7 +809,6 @@ void moduloClientes() {
 // Autor: Bernardo Novaski Vidal de Almeida
 // ----------------------------------------------------------------------------
 
-// Autor: Bernardo Novaski Vidal de Almeida
 void exibirVenda(int i) {
     int indiceDisco, indiceCliente;
 
@@ -855,7 +830,6 @@ void exibirVenda(int i) {
     }
 }
 
-// Autor: Bernardo Novaski Vidal de Almeida
 void registrarVenda() {
     int idCliente, idDisco, quantidade, indiceCliente, indiceDisco;
 
@@ -919,7 +893,6 @@ void registrarVenda() {
     totalVendas++;
 }
 
-// Autor: Bernardo Novaski Vidal de Almeida
 void listarHistoricoVendas() {
     int i;
     float faturamento = 0;
@@ -941,7 +914,6 @@ void listarHistoricoVendas() {
     printf("\nFaturamento total (vendas efetivadas): R$ %.2f\n", faturamento);
 }
 
-// Autor: Bernardo Novaski Vidal de Almeida
 void cancelarVenda() {
     int idVenda, indiceVenda, indiceDisco, indiceCliente, i;
 
@@ -968,13 +940,13 @@ void cancelarVenda() {
 
     historicoVendas[indiceVenda].ativo = 0;
 
-    // Devolve o disco ao estoque
+    // Devolve o disco no estoque
     indiceDisco = buscarDiscoPorId(historicoVendas[indiceVenda].idDiscoVendido);
     if (indiceDisco != -1) {
         acervoDiscos[indiceDisco].quantidadeEstoque = acervoDiscos[indiceDisco].quantidadeEstoque + historicoVendas[indiceVenda].quantidade;
     }
 
-    // Retira os pontos ganhos pelo cliente
+    // tira os pontos ganhos pelo cliente
     indiceCliente = buscarClientePorId(historicoVendas[indiceVenda].idClienteComprador);
     if (indiceCliente != -1) {
         listaClientes[indiceCliente].pontosFidelidade = listaClientes[indiceCliente].pontosFidelidade - historicoVendas[indiceVenda].quantidade;
@@ -986,7 +958,6 @@ void cancelarVenda() {
     printf("\nVenda %d cancelada! Estoque e pontos foram ajustados.\n", idVenda);
 }
 
-// Autor: Bernardo Novaski Vidal de Almeida
 void relatorioDiscoMaisVendido() {
     int i, j, soma, maior, indiceMaior;
 
@@ -1016,7 +987,6 @@ void relatorioDiscoMaisVendido() {
     }
 }
 
-// Autor: Bernardo Novaski Vidal de Almeida
 void relatorioClienteVip() {
     int i, j, compras, maior, indiceMaior;
     float gasto, gastoMaior;
@@ -1051,7 +1021,6 @@ void relatorioClienteVip() {
     }
 }
 
-// Autor: Bernardo Novaski Vidal de Almeida
 void relatorioComprasPorCliente() {
     int idCliente, indiceCliente, i, encontrou;
     float totalGasto;
@@ -1085,7 +1054,6 @@ void relatorioComprasPorCliente() {
     }
 }
 
-// Autor: Bernardo Novaski Vidal de Almeida
 void moduloVendasRelatorios() {
     int opcaoVenda;
 
@@ -1130,7 +1098,7 @@ void moduloVendasRelatorios() {
 }
 
 // ============================================================================
-// PARTE 3: FUNCAO PRINCIPAL (MAIN) - DESPACHANTE DE MENUS
+// PARTE 3: FUNCAO PRINCIPAL (MAIN) - MENUS
 // ============================================================================
 int main() {
     int opcaoPrincipal;
