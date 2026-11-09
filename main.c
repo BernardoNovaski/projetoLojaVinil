@@ -805,7 +805,7 @@ void moduloClientes() {
 }
 
 // ----------------------------------------------------------------------------
-// MODULO 4: PERSPECTIVA DE VENDAS E RELATORIOS ANALITICOS
+// MODULO 4: PERSPECTIVA DE VENDAS E RELATORIOS
 // Autor: Bernardo Novaski Vidal de Almeida
 // ----------------------------------------------------------------------------
 
