@@ -73,53 +73,6 @@ void exibirCabecalho() {
     printf("======================================================\n");
 }
 
-// Descarta o que sobrou digitado na linha (evita loop infinito por texto no lugar de numero)
-// Autor: Equipe 
-void limparBuffer() {
-    int c;
-
-    do {
-        c = getchar();
-    } while (c != '\n' && c != EOF);
-}
-
-// Le um numero inteiro; repete a pergunta ate o usuario digitar um numero valido
-// Autor: Equipe 
-int lerInteiro() {
-    int valor, lidos;
-
-    lidos = scanf("%d", &valor);
-    while (lidos != 1) {
-        if (lidos == EOF) {
-            exit(0);
-        }
-        limparBuffer();
-        printf("Entrada invalida! Digite apenas numeros inteiros: ");
-        lidos = scanf("%d", &valor);
-    }
-    limparBuffer();
-    return valor;
-}
-
-// Le um numero decimal (use ponto, ex.: 80.50); repete ate digitar um numero valido
-// Autor: Equipe
-float lerReal() {
-    float valor;
-    int lidos;
-
-    lidos = scanf("%f", &valor);
-    while (lidos != 1) {
-        if (lidos == EOF) {
-            exit(0);
-        }
-        limparBuffer();
-        printf("Entrada invalida! Digite um numero (ex.: 80.50): ");
-        lidos = scanf("%f", &valor);
-    }
-    limparBuffer();
-    return valor;
-}
-
 // ----------------------------------------------------------------------------
 // FUNCOES AUXILIARES DE BUSCA (usadas por mais de um modulo)
 // ----------------------------------------------------------------------------
@@ -172,15 +125,13 @@ void cadastrarDisco() {
 
     printf("Titulo (sem espacos, use _ no lugar): ");
     scanf("%49s", acervoDiscos[totalDiscos].titulo);
-    limparBuffer();
 
     printf("Artista (sem espacos, use _ no lugar): ");
     scanf("%49s", acervoDiscos[totalDiscos].artista);
-    limparBuffer();
 
     do {
         printf("Preco do disco: R$ ");
-        acervoDiscos[totalDiscos].preco = lerReal();
+        scanf("%f", &acervoDiscos[totalDiscos].preco);
         if (acervoDiscos[totalDiscos].preco <= 0) {
             printf("Preco invalido! Deve ser maior que zero.\n");
         }
@@ -188,7 +139,7 @@ void cadastrarDisco() {
 
     do {
         printf("Quantidade em estoque: ");
-        acervoDiscos[totalDiscos].quantidadeEstoque = lerInteiro();
+        scanf("%d", &acervoDiscos[totalDiscos].quantidadeEstoque);
         if (acervoDiscos[totalDiscos].quantidadeEstoque < 0) {
             printf("Quantidade invalida! Nao pode ser negativa.\n");
         }
@@ -206,7 +157,7 @@ void listarDiscos() {
     printf("\n1. Listar todos os discos\n");
     printf("2. Buscar disco por ID\n");
     printf("Escolha: ");
-    opcaoListagem = lerInteiro();
+    scanf("%d", &opcaoListagem);
 
     switch (opcaoListagem) {
         case 1:
@@ -224,7 +175,7 @@ void listarDiscos() {
             break;
         case 2:
             printf("\nDigite o ID do disco: ");
-            id = lerInteiro();
+            scanf("%d", &id);
             indice = buscarDiscoPorId(id);
             if (indice == -1 || acervoDiscos[indice].ativo == 0) {
                 printf("\nDisco nao encontrado!\n");
@@ -241,7 +192,7 @@ void editarDisco() {
     int id, indice;
 
     printf("\nDigite o ID do disco que deseja editar: ");
-    id = lerInteiro();
+    scanf("%d", &id);
 
     indice = buscarDiscoPorId(id);
     if (indice == -1 || acervoDiscos[indice].ativo == 0) {
@@ -254,7 +205,7 @@ void editarDisco() {
 
     do {
         printf("\nNovo preco: R$ ");
-        acervoDiscos[indice].preco = lerReal();
+        scanf("%f", &acervoDiscos[indice].preco);
         if (acervoDiscos[indice].preco <= 0) {
             printf("Preco invalido! Deve ser maior que zero.\n");
         }
@@ -262,7 +213,7 @@ void editarDisco() {
 
     do {
         printf("Novo estoque: ");
-        acervoDiscos[indice].quantidadeEstoque = lerInteiro();
+        scanf("%d", &acervoDiscos[indice].quantidadeEstoque);
         if (acervoDiscos[indice].quantidadeEstoque < 0) {
             printf("Quantidade invalida! Nao pode ser negativa.\n");
         }
@@ -275,7 +226,7 @@ void removerDisco() {
     int id, indice;
 
     printf("\nDigite o ID do disco que deseja remover: ");
-    id = lerInteiro();
+    scanf("%d", &id);
 
     indice = buscarDiscoPorId(id);
     if (indice == -1 || acervoDiscos[indice].ativo == 0) {
@@ -298,7 +249,7 @@ void moduloDiscos() {
         printf("4. Remover Disco do Acervo\n");
         printf("0. Voltar ao Menu Principal\n");
         printf("Escolha uma acao: ");
-        opcaoDisco = lerInteiro();
+        scanf("%d", &opcaoDisco);
 
         switch (opcaoDisco) {
             case 1:
@@ -341,7 +292,7 @@ void tocarMusica(char nomeGenero[], char musicas[][50], int totalMusicas) {
 
     printf("[0] Voltar aos generos\n");
     printf("Escolha o numero da musica que deseja tocar: ");
-    escolha = lerInteiro();
+    scanf("%d", &escolha);
 
     if (escolha > 0 && escolha <= totalMusicas) {
         printf("\n>> Tocando agora: '%s' <<\n\n", musicas[escolha - 1]);
@@ -393,7 +344,7 @@ void escutarMusicas() {
         }
         printf("[0] Voltar ao Modulo de Cabines\n");
         printf("Escolha um genero musical: ");
-        opcaoGenero = lerInteiro();
+        scanf("%d", &opcaoGenero);
 
         switch (opcaoGenero) {
             case 1:
@@ -451,15 +402,14 @@ void cadastrarCabine() {
     printf("\nID gerado para a cabine: %d\n", listaCabines[totalCabines].idCabine);
 
     printf("Numero da cabine: ");
-    listaCabines[totalCabines].numeroCabine = lerInteiro();
+    scanf("%d", &listaCabines[totalCabines].numeroCabine);
 
     printf("Descricao (sem espacos, use _ no lugar): ");
     scanf("%39s", listaCabines[totalCabines].descricao);
-    limparBuffer();
 
     do {
         printf("Valor por hora de uso: R$ ");
-        listaCabines[totalCabines].valorHoraUso = lerReal();
+        scanf("%f", &listaCabines[totalCabines].valorHoraUso);
         if (listaCabines[totalCabines].valorHoraUso < 0) {
             printf("Valor invalido! Nao pode ser negativo.\n");
         }
@@ -482,7 +432,7 @@ void listarCabines() {
     printf("3. Listar apenas cabines ocupadas\n");
     printf("4. Buscar cabine por ID\n");
     printf("Escolha: ");
-    opcaoListagem = lerInteiro();
+    scanf("%d", &opcaoListagem);
 
     switch (opcaoListagem) {
         case 1:
@@ -506,7 +456,7 @@ void listarCabines() {
             break;
         case 4:
             printf("\nDigite o ID da cabine: ");
-            id = lerInteiro();
+            scanf("%d", &id);
             indice = buscarCabinePorId(id);
             if (indice == -1 || listaCabines[indice].ativo == 0) {
                 printf("\nCabine nao encontrada!\n");
@@ -523,7 +473,7 @@ void editarCabine() {
     int id, indice, idCliente, indiceCliente;
 
     printf("\nDigite o ID da cabine que deseja editar: ");
-    id = lerInteiro();
+    scanf("%d", &id);
 
     indice = buscarCabinePorId(id);
     if (indice == -1 || listaCabines[indice].ativo == 0) {
@@ -536,7 +486,7 @@ void editarCabine() {
 
     do {
         printf("\nNovo status (1 = Ocupada, 0 = Livre): ");
-        listaCabines[indice].statusOcupacao = lerInteiro();
+        scanf("%d", &listaCabines[indice].statusOcupacao);
         if (listaCabines[indice].statusOcupacao != 0 && listaCabines[indice].statusOcupacao != 1) {
             printf("Status invalido! Digite 0 ou 1.\n");
         }
@@ -544,7 +494,7 @@ void editarCabine() {
 
     if (listaCabines[indice].statusOcupacao == 1) {
         printf("ID do cliente usando a cabine: ");
-        idCliente = lerInteiro();
+        scanf("%d", &idCliente);
 
         indiceCliente = buscarClientePorId(idCliente);
         if (indiceCliente == -1 || listaClientes[indiceCliente].ativo == 0) {
@@ -559,7 +509,7 @@ void editarCabine() {
 
         do {
             printf("Tempo de uso em minutos: ");
-            listaCabines[indice].tempoUsoMinutos = lerInteiro();
+            scanf("%d", &listaCabines[indice].tempoUsoMinutos);
             if (listaCabines[indice].tempoUsoMinutos < 0) {
                 printf("Tempo invalido! Nao pode ser negativo.\n");
             }
@@ -576,7 +526,7 @@ void removerCabine() {
     int id, indice;
 
     printf("\nDigite o ID da cabine que deseja dar baixa: ");
-    id = lerInteiro();
+    scanf("%d", &id);
 
     indice = buscarCabinePorId(id);
     if (indice == -1 || listaCabines[indice].ativo == 0) {
@@ -603,7 +553,7 @@ void moduloCabines() {
         printf("5. Ouvir Musicas na Cabine (por Genero)\n");
         printf("0. Voltar ao Menu Principal\n");
         printf("Escolha uma acao: ");
-        opcaoCabine = lerInteiro();
+        scanf("%d", &opcaoCabine);
 
         switch (opcaoCabine) {
             case 1:
@@ -653,11 +603,9 @@ void cadastrarCliente() {
 
     printf("Nome (sem espacos, use _ no lugar): ");
     scanf("%49s", listaClientes[totalClientes].nome);
-    limparBuffer();
 
     printf("Telefone (somente numeros): ");
     scanf("%19s", listaClientes[totalClientes].telefone);
-    limparBuffer();
 
     listaClientes[totalClientes].pontosFidelidade = 0;
     listaClientes[totalClientes].ativo = 1;
@@ -672,7 +620,7 @@ void listarClientes() {
     printf("\n1. Listar todos os clientes\n");
     printf("2. Buscar cliente por ID\n");
     printf("Escolha: ");
-    opcaoListagem = lerInteiro();
+    scanf("%d", &opcaoListagem);
 
     switch (opcaoListagem) {
         case 1:
@@ -690,7 +638,7 @@ void listarClientes() {
             break;
         case 2:
             printf("\nDigite o ID do cliente: ");
-            id = lerInteiro();
+            scanf("%d", &id);
             indice = buscarClientePorId(id);
             if (indice == -1 || listaClientes[indice].ativo == 0) {
                 printf("\nCliente nao encontrado!\n");
@@ -707,7 +655,7 @@ void editarCliente() {
     int id, indice, opcaoEdicao;
 
     printf("\nDigite o ID do cliente que deseja editar: ");
-    id = lerInteiro();
+    scanf("%d", &id);
 
     indice = buscarClientePorId(id);
     if (indice == -1 || listaClientes[indice].ativo == 0) {
@@ -723,25 +671,23 @@ void editarCliente() {
     printf("2. Telefone\n");
     printf("3. Pontos de fidelidade\n");
     printf("Escolha: ");
-    opcaoEdicao = lerInteiro();
+    scanf("%d", &opcaoEdicao);
 
     switch (opcaoEdicao) {
         case 1:
             printf("Novo nome (sem espacos, use _ no lugar): ");
             scanf("%49s", listaClientes[indice].nome);
-            limparBuffer();
             printf("\nNome atualizado com sucesso!\n");
             break;
         case 2:
             printf("Novo telefone (somente numeros): ");
             scanf("%19s", listaClientes[indice].telefone);
-            limparBuffer();
             printf("\nTelefone atualizado com sucesso!\n");
             break;
         case 3:
             do {
                 printf("Novos pontos de fidelidade: ");
-                listaClientes[indice].pontosFidelidade = lerInteiro();
+                scanf("%d", &listaClientes[indice].pontosFidelidade);
                 if (listaClientes[indice].pontosFidelidade < 0) {
                     printf("Pontos invalidos! Nao podem ser negativos.\n");
                 }
@@ -757,7 +703,7 @@ void removerCliente() {
     int id, indice;
 
     printf("\nDigite o ID do cliente que deseja remover: ");
-    id = lerInteiro();
+    scanf("%d", &id);
 
     indice = buscarClientePorId(id);
     if (indice == -1 || listaClientes[indice].ativo == 0) {
@@ -780,7 +726,7 @@ void moduloClientes() {
         printf("4. Remover Cliente\n");
         printf("0. Voltar ao Menu Principal\n");
         printf("Escolha uma acao: ");
-        opcaoCliente = lerInteiro();
+        scanf("%d", &opcaoCliente);
 
         switch (opcaoCliente) {
             case 1:
@@ -844,7 +790,7 @@ void registrarVenda() {
     }
 
     printf("\nID do cliente comprador: ");
-    idCliente = lerInteiro();
+    scanf("%d", &idCliente);
     indiceCliente = buscarClientePorId(idCliente);
     if (indiceCliente == -1 || listaClientes[indiceCliente].ativo == 0) {
         printf("\nCliente nao encontrado!\n");
@@ -852,7 +798,7 @@ void registrarVenda() {
     }
 
     printf("ID do disco vendido: ");
-    idDisco = lerInteiro();
+    scanf("%d", &idDisco);
     indiceDisco = buscarDiscoPorId(idDisco);
     if (indiceDisco == -1 || acervoDiscos[indiceDisco].ativo == 0) {
         printf("\nDisco nao encontrado!\n");
@@ -861,7 +807,7 @@ void registrarVenda() {
 
     do {
         printf("Quantidade: ");
-        quantidade = lerInteiro();
+        scanf("%d", &quantidade);
         if (quantidade <= 0) {
             printf("Quantidade invalida! Deve ser maior que zero.\n");
         }
@@ -880,7 +826,6 @@ void registrarVenda() {
 
     printf("Data da venda (DD/MM/AAAA): ");
     scanf("%10s", historicoVendas[totalVendas].dataVenda);
-    limparBuffer();
 
     historicoVendas[totalVendas].ativo = 1;
 
@@ -920,7 +865,7 @@ void cancelarVenda() {
     indiceVenda = -1;
 
     printf("\nDigite o ID da venda que deseja cancelar: ");
-    idVenda = lerInteiro();
+    scanf("%d", &idVenda);
 
     for (i = 0; i < totalVendas; i++) {
         if (historicoVendas[i].idVenda == idVenda) {
@@ -1029,7 +974,7 @@ void relatorioComprasPorCliente() {
     totalGasto = 0;
 
     printf("\nDigite o ID do cliente: ");
-    idCliente = lerInteiro();
+    scanf("%d", &idCliente);
 
     indiceCliente = buscarClientePorId(idCliente);
     if (indiceCliente == -1) {
@@ -1067,7 +1012,7 @@ void moduloVendasRelatorios() {
         printf("6. [RELATORIO] Compras Realizadas por um Cliente Especifico\n");
         printf("0. Voltar ao Menu Principal\n");
         printf("Escolha uma acao: ");
-        opcaoVenda = lerInteiro();
+        scanf("%d", &opcaoVenda);
 
         switch (opcaoVenda) {
             case 1:
@@ -1113,7 +1058,7 @@ int main() {
         printf("0. Encerrar o Sistema\n");
         printf("------------------------------------------------------\n");
         printf("Digite a opcao desejada: ");
-        opcaoPrincipal = lerInteiro();
+        scanf("%d", &opcaoPrincipal);
 
         switch (opcaoPrincipal) {
             case 1:
