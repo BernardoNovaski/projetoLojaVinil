@@ -3,6 +3,27 @@
 #include <string.h>
 
 // ============================================================================
+// ETAPA 2: CRIAÇÃO BANCO DE DADOS - CSV
+// ============================================================================
+
+/*
+int main() {
+	FILE * arq;
+	arq = fopen("bancoDeDados.txt", "w");
+
+    if (arq == NULL) {
+        printf("Erro ao abrir arquivo!\n");
+        return 1;
+    }
+
+    // Sempre feche para gravar no disco!
+    fclose(arq);
+    return 0;
+}
+
+*/
+
+// ============================================================================
 // PARTE 1: MODELAGEM DE DADOS (ESCOPO GLOBAL - 1 STRUCT POR INTEGRANTE)
 // ============================================================================
 
