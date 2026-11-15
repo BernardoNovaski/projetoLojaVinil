@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "clientes.h"
+#include "discos.h"
 
 #define MAX_CABINES 50
 
@@ -250,25 +251,37 @@ void removerCabine() {
     salvarCabinesCSV();
 }
 
-// ---------------- Cabine de escuta: musicas por genero ----------------
+// ---------------- Cabine de escuta: usa os discos reais do acervo (discos.csv) ----------------
 
-void tocarMusica(char nomeGenero[], char musicas[][50], int totalMusicas) {
-    int escolha, i;
+// Toca o disco que esta na posicao pos do vetor acervoDiscos
+void tocarDisco(int pos) {
+    printf("\n>> Tocando agora: '%s' - %s (%s) <<\n\n",
+           acervoDiscos[pos].titulo, acervoDiscos[pos].artista, acervoDiscos[pos].genero);
+}
 
-    printf("\n==============================\n");
-    printf("   GENERO: %s\n", nomeGenero);
-    printf("==============================\n");
+// Lista so os discos do genero escolhido e deixa o cliente escolher qual tocar
+void escolherDiscoDoGenero(char genero[]) {
+    int i, escolha, encontrou = 0;
+    int indices[MAX_DISCOS];   // guarda a posicao de cada disco encontrado
 
-    for (i = 0; i < totalMusicas; i++) {
-        printf("[%d] %s\n", i + 1, musicas[i]);
+    printf("\n==============================\n   GENERO: %s\n==============================\n", genero);
+    for (i = 0; i < totalDiscos; i++) {
+        if (strcmp(acervoDiscos[i].genero, genero) == 0) {
+            indices[encontrou] = i;
+            printf("[%d] %s - %s\n", encontrou + 1, acervoDiscos[i].titulo, acervoDiscos[i].artista);
+            encontrou++;
+        }
+    }
+    if (encontrou == 0) {
+        printf("Nenhum disco desse genero no acervo.\n");
+        return;
     }
 
-    printf("[0] Voltar aos generos\n");
-    printf("Escolha o numero da musica que deseja tocar: ");
+    printf("[0] Voltar aos generos\nEscolha o numero do disco que deseja tocar: ");
     scanf("%d", &escolha);
 
-    if (escolha > 0 && escolha <= totalMusicas) {
-        printf("\n>> Tocando agora: '%s' <<\n\n", musicas[escolha - 1]);
+    if (escolha > 0 && escolha <= encontrou) {
+        tocarDisco(indices[escolha - 1]);
     } else if (escolha == 0) {
         printf("\nVoltando...\n\n");
     } else {
@@ -276,54 +289,44 @@ void tocarMusica(char nomeGenero[], char musicas[][50], int totalMusicas) {
     }
 }
 
+// Monta o menu de generos a partir dos generos que existem no acervo (sem repetir)
 void escutarMusicas() {
-    int opcaoGenero, i;
-
-    char generos[4][20] = {"Rock", "Pop", "Gaucha", "Jazz"};
-    int totalGeneros = 4;
-
-    char rockMusicas[3][50] = {
-        "Stairway to Heaven - Led Zeppelin",
-        "Smells Like Teen Spirit - Nirvana",
-        "Back in Black - AC/DC"
-    };
-    char popMusicas[3][50] = {
-        "Billie Jean - Michael Jackson",
-        "Bad Romance - Lady Gaga",
-        "Blinding Lights - The Weeknd"
-    };
-    char gauchaMusicas[3][50] = {
-        "Canto Alegretense - Os Mateadores",
-        "Baile de Fole - Teixeirinha",
-        "Gauchinha Melindrosa - Almira e Zico"
-    };
-    char jazzMusicas[3][50] = {
-        "Take Five - Dave Brubeck",
-        "So What - Miles Davis",
-        "Fly Me to the Moon - Frank Sinatra"
-    };
+    int opcao, i, j, total, repetido;
+    char generos[MAX_DISCOS][20];
 
     do {
-        printf("\n==============================\n");
-        printf("   CABINE DE ESCUTA - GENEROS\n");
-        printf("==============================\n");
-        for (i = 0; i < totalGeneros; i++) {
-            printf("[%d] %s\n", i + 1, generos[i]);
+        total = 0;
+        for (i = 0; i < totalDiscos; i++) {
+            repetido = 0;
+            for (j = 0; j < total; j++) {
+                if (strcmp(generos[j], acervoDiscos[i].genero) == 0) { repetido = 1; }
+            }
+            if (repetido == 0) {
+                strcpy(generos[total], acervoDiscos[i].genero);
+                total++;
+            }
         }
-        printf("[0] Voltar ao Modulo de Cabines\n");
-        printf("Escolha um genero musical: ");
-        scanf("%d", &opcaoGenero);
 
-        switch (opcaoGenero) {
-            case 1: tocarMusica(generos[0], rockMusicas, 3); break;
-            case 2: tocarMusica(generos[1], popMusicas, 3); break;
-            case 3: tocarMusica(generos[2], gauchaMusicas, 3); break;
-            case 4: tocarMusica(generos[3], jazzMusicas, 3); break;
-            case 0: printf("\nSaindo da cabine de escuta...\n"); break;
-            default: printf("\nOpcao invalida! Tente novamente.\n");
+        printf("\n==============================\n   CABINE DE ESCUTA - GENEROS\n==============================\n");
+        if (total == 0) {
+            printf("Nenhum disco cadastrado no acervo.\n");
+            return;
         }
-    } while (opcaoGenero != 0);
+        for (i = 0; i < total; i++) { printf("[%d] %s\n", i + 1, generos[i]); }
+        printf("[0] Voltar ao Modulo de Cabines\nEscolha um genero musical: ");
+        scanf("%d", &opcao);
+
+        if (opcao > 0 && opcao <= total) {
+            escolherDiscoDoGenero(generos[opcao - 1]);
+        } else if (opcao == 0) {
+            printf("\nSaindo da cabine de escuta...\n");
+        } else {
+            printf("\nOpcao invalida! Tente novamente.\n");
+        }
+    } while (opcao != 0);
 }
+
+// Fim da cabine de escuta. Menu do modulo de cabines logo abaixo.
 
 void moduloCabines() {
     int opcaoCabine;

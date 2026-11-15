@@ -11,6 +11,7 @@ struct Disco {
     int idDisco;
     char titulo[50];
     char artista[50];
+    char genero[20];
     float preco;
     int quantidadeEstoque;
 };
@@ -29,10 +30,11 @@ void salvarDiscosCSV() {
     }
 
     for (i = 0; i < totalDiscos; i++) {
-        fprintf(arq, "%d;%s;%s;%.2f;%d\n",
+        fprintf(arq, "%d;%s;%s;%s;%.2f;%d\n",
                 acervoDiscos[i].idDisco,
                 acervoDiscos[i].titulo,
                 acervoDiscos[i].artista,
+                acervoDiscos[i].genero,
                 acervoDiscos[i].preco,
                 acervoDiscos[i].quantidadeEstoque);
     }
@@ -49,12 +51,13 @@ void carregarDiscosCSV() {
 
     totalDiscos = 0;
     while (totalDiscos < MAX_DISCOS &&
-           fscanf(arq, "%d;%49[^;];%49[^;];%f;%d\n",
+           fscanf(arq, "%d;%49[^;];%49[^;];%19[^;];%f;%d\n",
                   &acervoDiscos[totalDiscos].idDisco,
                   acervoDiscos[totalDiscos].titulo,
                   acervoDiscos[totalDiscos].artista,
+                  acervoDiscos[totalDiscos].genero,
                   &acervoDiscos[totalDiscos].preco,
-                  &acervoDiscos[totalDiscos].quantidadeEstoque) == 5) {
+                  &acervoDiscos[totalDiscos].quantidadeEstoque) == 6) {
         totalDiscos++;
     }
     fclose(arq);
@@ -85,10 +88,11 @@ int proximoIdDisco() {
 }
 
 void exibirDisco(int i) {
-    printf("ID: %d | %-25s | %-20s | R$ %7.2f | Estoque: %d\n",
+    printf("ID: %d | %-25s | %-20s | %-10s | R$ %7.2f | Estoque: %d\n",
            acervoDiscos[i].idDisco,
            acervoDiscos[i].titulo,
            acervoDiscos[i].artista,
+           acervoDiscos[i].genero,
            acervoDiscos[i].preco,
            acervoDiscos[i].quantidadeEstoque);
 }
@@ -109,6 +113,9 @@ void cadastrarDisco() {
 
     printf("Artista: ");
     scanf(" %49[^\n]", acervoDiscos[pos].artista);
+
+    printf("Genero (ex.: Rock, Pop, Jazz): ");
+    scanf(" %19[^\n]", acervoDiscos[pos].genero);
 
     do {
         printf("Preco do disco: R$ ");
