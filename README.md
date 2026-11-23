@@ -1,79 +1,99 @@
-# projetoLojaVinil
-# Vinyl Hub: Sistema de Gestão da Loja de Discos de Vinil Retrô (1985)
-TURMA DE SEGUNDA-FEIRA À NOITE - GRUPO 2 - TEMA 5 - LOJA DE DISCO DE VINIL
+# Vinyl Hub - Sistema de Gestão para Loja de Discos de Vinil
 
-Projeto da disciplina **Algoritmos e Pensamento Computacional**, referente ao **Checkpoint 1 (Gateway 1)** do Projeto P2.
+Sistema de gestão de uma loja de discos de vinil retrô (tema anos 80), desenvolvido em **linguagem C** e executado no **terminal**. Cada integrante da equipe é responsável por um módulo completo, com sua própria struct, seu submenu e as operações de cadastrar, listar/buscar, editar e remover.
 
-Sistema em modo console, escrito em linguagem C, para gerenciar uma loja de discos de vinil com cabines de escuta e caixa de vendas. Nesta etapa, a arquitetura completa (structs, menus e submenus) está pronta e as rotinas de cada opção estão marcadas como `[Em construcao]`, aguardando a lógica das próximas etapas.
+Projeto da disciplina **Algoritmos e Pensamento Computacional**, curso de Análise e Desenvolvimento de Sistemas, Universidade Positivo.
 
-## Equipe e responsabilidades
+> Vídeo de apresentação: [cole aqui o link do YouTube]
 
-| Módulo | Perspectiva | Responsável |
-|--------|-------------|-------------|
-| 1 | Acervo de Discos de Vinil | Nathan Souza Gusso |
-| 2 | Cabines de Escuta | Guilherme Monteiro de Andrade |
-| 3 | Clientes do Clube do Vinil | José Gustavo da Silva Bertoche |
-| 4 | Vendas no Caixa e Relatórios | Bernardo Novaski Vidal de Almeida |
+---
 
-## Modelagem de dados
+## Funcionalidades
 
-Cada integrante é dono de uma `struct` declarada no escopo global, com seu vetor de armazenamento (50 posições) e um contador.
+### Módulo 1: Acervo de Discos
+- Cadastro de discos com título, artista, preço e estoque
+- Listagem de todos os discos ou busca por ID
+- Edição de preço e estoque
+- Remoção do acervo
 
-| Struct | Campos | Vetor global | Contador |
-|--------|--------|--------------|----------|
-| `Disco` | `idDisco`, `titulo[50]`, `artista[50]`, `preco`, `quantidadeEstoque` | `acervoDiscos[50]` | `totalDiscos` |
-| `Cabine` | `idCabine`, `numeroCabine`, `statusOcupacao` (1 = ocupada, 0 = livre), `tempoUsoMinutos`, `idClienteUsando` | `listaCabines[50]` | `totalCabines` |
-| `Cliente` | `idCliente`, `nome[50]`, `telefone[20]`, `pontosFidelidade`, `ativo` (1 = ativo, 0 = removido) | `listaClientes[50]` | `totalClientes` |
-| `Venda` | `idVenda`, `idClienteComprador`, `idDiscoVendido`, `valorTotal` | `historicoVendas[50]` | `totalVendas` |
+### Módulo 2: Cabines de Escuta
+- Cadastro de cabines (número, descrição e valor por hora)
+- Listagem de todas, só livres, só ocupadas ou busca por ID
+- Edição de status, cliente e tempo de uso
+- Baixa de cabine
+- Escuta de músicas por gênero (Rock, Pop, Gaúcha e Jazz)
 
-## Estrutura do menu
+### Módulo 3: Clientes do Clube do Vinil
+- Cadastro de clientes com nome e telefone
+- Listagem e busca por ID
+- Edição de nome, telefone ou pontos de fidelidade
+- Remoção de clientes
 
-```
-Menu Principal (main)
-+-- 1. Módulo de Discos        -> Cadastrar | Listar/Buscar | Editar | Remover
-+-- 2. Módulo de Cabines       -> Cadastrar | Listar/Buscar | Editar | Remover
-+-- 3. Módulo de Clientes      -> Cadastrar | Listar/Buscar | Editar | Remover
-+-- 4. Módulo de Vendas e Relatórios
-¦       +-- Registrar venda (cruza ID do Cliente e ID do Disco)
-¦       +-- Listar histórico de vendas
-¦       +-- Cancelar / estornar venda
-¦       +-- Relatórios: disco mais vendido, cliente VIP, compras por cliente
-+-- 0. Encerrar o sistema
-```
+### Módulo 4: Vendas e Relatórios
+- Registro de vendas, cruzando cliente e disco, com validação de estoque
+- Histórico de vendas com faturamento total
+- Cancelamento de venda, que devolve o disco ao estoque e retira os pontos
+- Relatórios analíticos:
+  - disco mais vendido
+  - cliente VIP (maior número de compras)
+  - compras de um cliente específico
 
-Todos os menus funcionam em laço `do-while` com `switch-case`, e a opção `0` de cada submenu volta ao menu principal sem fechar o programa.
+### Geral
+- Menu principal em loop que direciona para os quatro módulos
+- Persistência: os dados são salvos em arquivo
 
-## Organização do código
+---
 
-O arquivo único `main.c` está dividido em três partes:
+## Conceitos utilizados
 
-1. **PARTE 1: Modelagem de dados (escopo global):** structs, vetores e contadores.
-2. **PARTE 2: Funções de interface e módulos:** `exibirCabecalho()`, `moduloDiscos()`, `moduloCabines()`, `moduloClientes()` e `moduloVendasRelatorios()`, cada uma identificada com `// Autor: Nome`.
-3. **PARTE 3: Função principal (`main`):** menu principal que direciona para os módulos.
+- `struct` e vetores globais de structs (`#define` para o tamanho máximo)
+- Matrizes de texto (músicas por gênero)
+- Funções `void` e funções com retorno (busca por ID retorna a posição ou `-1`)
+- Menus com `do-while` e `switch-case`
+- Laços `for` e `while`, inclusive aninhados nos relatórios
+- Remoção lógica: o registro não é apagado, apenas marcado com `ativo = 0`
+- Leitura e escrita de arquivos
 
-Bibliotecas utilizadas: `stdio.h`, `stdlib.h`, `string.h` e `locale.h`. O projeto usa apenas o que foi ensinado em aula: `struct` padrão, vetores globais de tamanho fixo, `if/else`, `switch-case`, `for`, `while`, `do-while` e funções `void`.
+---
 
 ## Como compilar e executar
 
-Com o GCC instalado:
+### Com GCC
 
 ```bash
-gcc main.c -o main
-./main
+gcc main.c -o vinylhub
+./vinylhub
 ```
 
-No PowerShell (Windows), execute com `.\main.exe`. Também é possível abrir o `main.c` no Dev-C++ ou no VS Code e compilar por lá.
+No Windows, execute `vinylhub.exe`.
 
-Se os acentos aparecerem errados no terminal do Windows, execute `chcp 65001` antes do programa.
+### Com Dev-C++
 
-## Próximas etapas
+1. Abra o arquivo `main.c`
+2. Compile e execute com `F11`
 
-- Implementar o CRUD completo de cada módulo.
-- Implementar o registro de vendas e os relatórios analíticos.
-- Salvar e carregar os vetores em arquivos `.txt` ou `.csv` com `FILE *`.
+---
 
-## Fluxo de trabalho da equipe
+## Como usar
 
-- Cada integrante altera apenas a função do seu módulo, para evitar conflitos no `main.c`.
-- Fazer commits frequentes, com mensagens claras (por exemplo: `Adiciona cadastro de disco`).
-- Cada integrante deve saber explicar todas as linhas do seu módulo.
+1. No menu principal, escolha um módulo digitando o número correspondente.
+2. Dentro do módulo, escolha a ação desejada. O `0` volta ao menu anterior.
+3. Para registrar uma venda, cadastre antes ao menos **um cliente** e **um disco**.
+
+Dicas de digitação:
+- digite um valor por vez e aperte **Enter** depois de cada um;
+- use **ponto** nos preços (`80.50`);
+- nos campos de texto, escreva sem espaços ou use `_` no lugar (`Michael_Jackson`).
+
+---
+
+## Equipe
+
+| Integrante | Módulo |
+|---|---|
+| Nathan Souza Gusso | Acervo de Discos |
+| Guilherme Monteiro de Andrade | Cabines de Escuta |
+| José Gustavo da Silva Bertoche | Clientes do Clube do Vinil |
+| Bernardo Novaski Vidal de Almeida | Vendas e Relatórios |
+
+Cada função do código está identificada com o autor responsável (`// Autor: Nome`).
